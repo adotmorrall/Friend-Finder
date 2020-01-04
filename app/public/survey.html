@@ -190,30 +190,55 @@
     <script type="text/javascript">
         $('#submit').click(function (event) {
             event.preventDefault();
-            var newFriend = {
-                name: $('#name').val().trim(),
-                photo: $('#photo').val().trim(),
-                scores: [
-                    $('#question-1').val().trim(),
-                    $('#question-2').val().trim(),
-                    $('#question-3').val().trim(),
-                    $('#question-4').val().trim(),
-                    $('#question-5').val().trim(),
-                    $('#question-6').val().trim(),
-                    $('#question-7').val().trim(),
-                    $('#question-8').val().trim(),
-                    $('#question-9').val().trim(),
-                    $('#question-10').val().trim()
-                ]
-            };
 
-            // Post new friend to /api/friends webpage
-            $.post('/api/friends', newFriend)
-                .then(function (data) {
-                    console.log('Adding new friend...');
-                    console.log('survey.html', data);
-                });
+            var valid = true;
+            var nameInput = $('#name').val().trim();
+            var photoInput = $('#photo').val().trim();
+            var q1 = $('#question-1').val().trim();
+            var q2 = $('#question-2').val().trim();
+            var q3 = $('#question-3').val().trim();
+            var q4 = $('#question-4').val().trim();
+            var q5 = $('#question-5').val().trim();
+            var q6 = $('#question-6').val().trim();
+            var q7 = $('#question-7').val().trim();
+            var q8 = $('#question-8').val().trim();
+            var q9 = $('#question-9').val().trim();
+            var q10 = $('#question-10').val().trim();
 
+            if (nameInput || photoInput === '') {
+                valid = false;
+            } else if (
+                q1 || q2 || q3 || q4 || q5 || q6 || q7 || q8 || q9 || q10 === 'empty'
+            ) {
+                valid = false;
+            }
+
+            if (valid === true) {
+                var newFriend = {
+                    name: nameInput,
+                    photo: photoInput,
+                    scores: [
+                        q1,
+                        q2,
+                        q3,
+                        q4,
+                        q5,
+                        q6,
+                        q7,
+                        q8,
+                        q9,
+                        q10,
+                    ],
+                };
+                // Post new friend to /api/friends webpage
+                $.post('/api/friends', newFriend)
+                    .then(function (data) {
+                        console.log('Adding new friend...');
+                        console.log('survey.html', data);
+                    });
+            } else {
+                alert(`A required field is missing. Please complete the entire survey.`)
+            }
         });
 
     </script>
