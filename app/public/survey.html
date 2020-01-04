@@ -195,7 +195,7 @@
                 photo: $('#photo').val().trim()
             };
 
-            // Post new friend to /api/friends
+            // Post new friend to /api/friends webpage
             $.post('/api/friends', newFriend)
                 .then(function (data) {
                     console.log('Adding new friend...');
