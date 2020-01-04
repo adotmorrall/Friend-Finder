@@ -43,7 +43,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="ff-survey">
         <div class="header">
             <h2 class="display-5 font-weight-normal">Hello Friend!</h2>
             <p>Before you start, fill out the following information before you take our survey.</p>
@@ -181,7 +181,7 @@
 
             </form>
 
-            <button class="btn btn-primary btn-lg" id="submit">Submit</button>
+            <button class="btn btn-primary btn-lg" typ="submit" id="submit">Submit</button>
 
         </div>
     </div>
@@ -192,7 +192,19 @@
             event.preventDefault();
             var newFriend = {
                 name: $('#name').val().trim(),
-                photo: $('#photo').val().trim()
+                photo: $('#photo').val().trim(),
+                scores: [
+                    $('#question-1').val().trim(),
+                    $('#question-2').val().trim(),
+                    $('#question-3').val().trim(),
+                    $('#question-4').val().trim(),
+                    $('#question-5').val().trim(),
+                    $('#question-6').val().trim(),
+                    $('#question-7').val().trim(),
+                    $('#question-8').val().trim(),
+                    $('#question-9').val().trim(),
+                    $('#question-10').val().trim()
+                ]
             };
 
             // Post new friend to /api/friends webpage
