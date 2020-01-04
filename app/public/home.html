@@ -17,17 +17,27 @@
     <!-- Move to external CSS sheet -->
     <style>
         body {
-            background: url(https://images.pexels.com/photos/196666/pexels-photo-196666.jpeg?auto=compress&cs=tinysrgb&h=1200&w=2000)
+            background: url(https://images.pexels.com/photos/3184193/pexels-photo-3184193.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* background-position: center; */
+            background-attachment: fixed;
         }
 
         .jumbotron {
-            margin-top: 1em;
-            margin-left: 6em;
+            margin-top: 4em;
+            margin-left: 1em;
             background: border-box;
         }
 
         p {
             font-size: 20px;
+        }
+
+        #survey-btn {
+            background-color: cadetblue;
+            border-color: cadetblue;
+            color: black;
         }
     </style>
 
@@ -39,11 +49,9 @@
             <h1 class="display-3 font-weight-normal">Friend Finder</h1>
             <hr>
             <p>Fill out a few simple questions, and find your perfect match!</p>
-            <a class="btn btn-primary btn-lg" href="survey.html" role="button">Take Survey</a>
+            <a class="btn btn-primary btn-lg" href="survey.html" role="button" id="survey-btn">Take Survey</a>
         </div>
     </div>
-
-
 </body>
 
 </html>
