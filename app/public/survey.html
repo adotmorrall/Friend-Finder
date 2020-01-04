@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- Style sheet -->
     <link rel="stylesheet" href="../css/style.css">
 
@@ -26,6 +29,14 @@
 
         #name {
             margin-bottom: .5em;
+        }
+
+        #submit {
+            background-color: cadetblue;
+            border-color: cadetblue;
+            color: black;
+            /* padding: 1em; */
+            margin-bottom: 1em;
         }
     </style>
 
@@ -170,11 +181,30 @@
 
             </form>
 
-            <button class="btn btn-primary btn-lg">Submit</button>
-
+            <button class="btn btn-primary btn-lg" id="submit">Submit</button>
 
         </div>
     </div>
+
+    <!-- Script to POST new friend -->
+    <script type="text/javascript">
+        $('#submit').click(function (event) {
+            event.preventDefault();
+            var newFriend = {
+                name: $('#name').val().trim(),
+                photo: $('#photo').val().trim()
+            };
+
+            // Post new friend to /api/friends
+            $.post('/api/friends', newFriend)
+                .then(function (data) {
+                    console.log('Adding new friend...');
+                    console.log('survey.html', data);
+                });
+
+        });
+
+    </script>
 
 </body>
 
