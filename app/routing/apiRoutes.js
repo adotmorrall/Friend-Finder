@@ -10,10 +10,17 @@ module.exports = function (app) {
     // Add new friend
     app.post('/api/friends', function (req, res) {
         var newFriend = req.body;
-
-        newFriend.name = newFriend.name.replace(/\s+/g, "");
         console.log(newFriend);
-        friends.push(newFriend);
-        res.json(newFriend);
+
+        // Convert user scares into an array
+        newFriend.scores = parseInt(newFriend.scores);
+        for (var i = 0; i < newFriend.scores; i++) {
+            console.log(newFriend.scores[i]);
+        }
+
+
+        // Add friend scores
+        // friends.push(newFriend);
+        // res.json(newFriend);
     });
 }
