@@ -181,7 +181,28 @@
 
             </form>
 
-            <button class="btn btn-primary btn-lg" typ="submit" id="submit">Submit</button>
+            <button class="btn btn-primary btn-lg" data-toggle="modal" type="submit" id="submit">Submit</button>
+
+            <!-- Modal -->
+            <div id="bf-modal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Your New Pal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h3 id="bf-name"></h3>
+                            <img id="bf-photo" src="#" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -191,6 +212,7 @@
                 Repo</a>
         </footer>
 
+
     </div>
 
     <!-- Script to POST new friend -->
@@ -198,44 +220,56 @@
         $('#submit').click(function (event) {
             event.preventDefault();
 
-            var nameInput = $('#name').val().trim();
-            var photoInput = $('#photo').val().trim();
-            var q1 = $('#question-1').val().trim();
-            var q2 = $('#question-2').val().trim();
-            var q3 = $('#question-3').val().trim();
-            var q4 = $('#question-4').val().trim();
-            var q5 = $('#question-5').val().trim();
-            var q6 = $('#question-6').val().trim();
-            var q7 = $('#question-7').val().trim();
-            var q8 = $('#question-8').val().trim();
-            var q9 = $('#question-9').val().trim();
-            var q10 = $('#question-10').val().trim();
+            var valid = true;
 
-            var newFriend = {
-                name: nameInput,
-                photo: photoInput,
-                scores: [
-                    q1,
-                    q2,
-                    q3,
-                    q4,
-                    q5,
-                    q6,
-                    q7,
-                    q8,
-                    q9,
-                    q10,
-                ],
-            };
+            // Validating if any part of the form is empty
+            if ($('#name').val() === '' || $('#photo').val() === '') {
+                valid = false;
+            } else if (
+                $('#question-1').val() === 'empty' ||
+                $('#question-2').val() === 'empty' ||
+                $('#question-3').val() === 'empty' ||
+                $('#question-4').val() === 'empty' ||
+                $('#question-5').val() === 'empty' ||
+                $('#question-6').val() === 'empty' ||
+                $('#question-7').val() === 'empty' ||
+                $('#question-8').val() === 'empty' ||
+                $('#question-9').val() === 'empty' ||
+                $('#question-10').val() === 'empty'
+            ) {
+                valid = false;
+            }
 
-            // Post new friend to /api/friends webpage
-            $.post('/api/friends', newFriend)
-                .then(function (data) {
-                    console.log('Adding new friend...');
-                    console.log('survey.html', data);
+            // If form is completely filled, POST new friend info
+            if (valid === true) {
+                var newFriend = {
+                    name: $('#name').val(),
+                    photo: $('#photo').val(),
+                    scores: [
+                        $('#question-1').val(),
+                        $('#question-2').val(),
+                        $('#question-3').val(),
+                        $('#question-4').val(),
+                        $('#question-5').val(),
+                        $('#question-6').val(),
+                        $('#question-7').val(),
+                        $('#question-8').val(),
+                        $('#question-9').val(),
+                        $('#question-10').val()
+                    ]
+                };
+
+                // var currentURL = window.location.origin;
+
+                // Post new friend to /api/friends webpage
+                $.post(currentURL + '/api/friends', newFriend, function (data) {
+                    // console.log(data);
+                    $('#bf-name').text(data.name);
+                    $('#bf-photo').attr('src', data.photo);
                 });
-
-
+            } else {
+                alert(`Please make sure to answer all questions.`)
+            }
         });
 
     </script>
