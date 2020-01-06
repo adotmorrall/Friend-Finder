@@ -3,7 +3,7 @@
 Try this compatibility-based application that matches you with your best friend. Once you've filled out the survey, we'll compare your answers and display the name and picture of the person that best matches you.
 
 ## Let's Get Started
-Click [here](#) to find your new best friend!
+Click [here](https://blooming-crag-62645.herokuapp.com/) to find your new best friend!
 
 ![Friend Finder](/app/assets/friend-finder.jpg)
 
